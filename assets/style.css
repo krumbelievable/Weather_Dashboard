@@ -1,0 +1,51 @@
+html {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 10px;
+    }
+    .top{
+        text-align: center;
+        background-image: linear-gradient(to right, blue, rgb(58, 58, 126));
+        color: white;
+        padding: 10px;
+    }
+    #weather-search{
+        display: block;
+        font-weight: bold;
+        font-size:larger;
+    }
+    
+    #title-search{
+        display: block;
+        
+    }
+    
+    .top-header{
+        border: 5px;
+        border-radius: round;
+    }
+    
+    .card-body{
+        border: black;
+    }
+    
+    .goodUV {
+        background-color: green;
+        border-style: solid;
+        border-radius: round;
+        color: white;
+    
+    }
+    
+    .moderateUV{
+        background-color: yellow;
+        border-style: solid;
+        border-radius: round;
+        color: white;
+    }
+    
+    .severeUV{
+        background-color: red;
+        border-style: solid;
+        border-radius: round;
+        color: white;
+    }
