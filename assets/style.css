@@ -28,7 +28,7 @@ html {
         border: black;
     }
     
-    /* all uv options for styling of elements */
+    /* all uv options for styling of elements called in js file */
 
     .UVGood {
         background-color: green;
