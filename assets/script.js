@@ -1,19 +1,21 @@
-var weatherSearch = document.querySelector('#weather-search');
-var cityWeather = document.querySelector('.city-weather');
-var cityText = document.querySelector('#city-text');
-var searchButton = document.querySelector('.searchBtn');
-var fiveDayForecast = document.querySelector('.forecast-5');
-let history = document.querySelector('.history');
-const APIKey = '5292a248e8acdb206f3b3112df2113a7';
-
 // Global variables and api key
 
+var searchButton = document.querySelector('.searchBtn');
+var cityText = document.querySelector('#city-text');
+var fiveDayForecast = document.querySelector('.forecast-5');
+var cityWeather = document.querySelector('.city-weather');
+let history = document.querySelector('.history');
+var weatherSearch = document.querySelector('#weather-search');
+const APIKey = '5292a248e8acdb206f3b3112df2113a7';
+
+// this is the function to call the api and populate the div
 function findCity(event) {
 	event.preventDefault();
 	clearData();
 	var cityVal = cityText.value || event.target.innerText;
 	cityText.value = '';
 
+	// builds the api request root
 	var queryURL =
 		'https://api.openweathermap.org/data/2.5/weather?q=' +
 		cityVal +
@@ -28,17 +30,18 @@ function findCity(event) {
 		.then(function (response) {
 			return response.json();
 		})
+		//grabs specific data from the request body
 		.then(function (data) {
-			let latitude = data.coord.lat;
-			let longitude = data.coord.lon;
-			let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${APIKey}&units=imperial`;
+			let lat = data.coord.lat;
+			let long = data.coord.lon;
+			let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${APIKey}&units=imperial`;
 			let uvURL =
 				'https://api.openweathermap.org/data/2.5/uvi?appid=' +
 				APIKey +
 				'&lat=' +
-				latitude +
+				lat +
 				'&lon=' +
-				longitude;
+				long;
 
 			// Same with the five day forecast
 			fetch(forecastURL)
@@ -48,16 +51,18 @@ function findCity(event) {
 
 				.then((forecastData) => {
 					let index = [0, 8, 16, 24, 32];
+					// for loop that iterates over our div to give the five day forecast
 					for (x of index) {
 						let date = document.createElement('h3');
-						// Creating the element for the html
+						// Creates elements for the div in our index
 						let icon = document.createElement('img');
+						let humidity = document.createElement('p');
 						let temp = document.createElement('p');
 						let windSpeed = document.createElement('p');
-						let humidity = document.createElement('p');
 						date.textContent = moment(forecastData.list[x].dt_txt).format(
 							'MM/DD/YY'
 						);
+						// Grabs all of the extra data that was parsed
 						icon.src =
 							'https://openweathermap.org/img/wn/' +
 							data.weather[0].icon +
@@ -72,13 +77,13 @@ function findCity(event) {
 					}
 				});
 
+			// Grabs the request data and adds it to elements
 			var cityCurrent = document.createElement('h2');
-			// Same done for the city typed in.
-			var cityTemp = document.createElement('p');
-			var cityWind = document.createElement('p');
 			var cityHumidity = document.createElement('p');
 			var cityUV = document.createElement('p');
+			var cityWind = document.createElement('p');
 			var cityImage = document.createElement('img');
+			var cityTemp = document.createElement('p');
 			cityCurrent.textContent = data.name + ' ' + moment().format('MM/DD/YY');
 			cityTemp.textContent = ' Temp: ' + data.main.temp + ' F ';
 			cityWind.textContent = ' Wind: ' + data.wind.speed + ' MPH ';
@@ -87,7 +92,7 @@ function findCity(event) {
 			cityImage.src =
 				'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png';
 
-			// Fetches UV data from the API and turns it into JSON
+			// Fetches UV data from the API and turns it into JSON. Also grabs styling
 			fetch(uvURL)
 				.then((response) => {
 					return response.json();
@@ -95,15 +100,15 @@ function findCity(event) {
 				.then((uvData) => {
 					cityUV.textContent = 'UV: ' + uvData.value + ' %';
 					if (uvData.vaue < 3) {
-						cityUV.classList.add('goodUV');
+						cityUV.classList.add('UVGood');
 					}
 					if (uvData.value < 7) {
-						cityUV.classList.remove('goodUV');
-						cityUV.classList.add('moderateUV');
+						cityUV.classList.remove('UVGood');
+						cityUV.classList.add('UVMod');
 					}
 					if (uvData.value > 7) {
-						cityCurrent.classList.remove('moderateUV');
-						cityUV.classList.add('severeUV');
+						cityCurrent.classList.remove('UVMod');
+						cityUV.classList.add('UVBad');
 					}
 				});
 

@@ -4,8 +4,8 @@ html {
     }
     .top{
         text-align: center;
-        background-image: linear-gradient(to right, blue, rgb(58, 58, 126));
-        color: white;
+        background-image: linear-gradient(to right, rgb(247, 0, 255), rgb(59, 17, 63));
+        color: rgb(241, 236, 236);
         padding: 10px;
     }
     #weather-search{
@@ -28,24 +28,26 @@ html {
         border: black;
     }
     
-    .goodUV {
+    /* all uv options for styling of elements */
+
+    .UVGood {
         background-color: green;
         border-style: solid;
         border-radius: round;
-        color: white;
+        color: rgb(241, 236, 236);
     
     }
     
-    .moderateUV{
+    .UVMod{
         background-color: yellow;
         border-style: solid;
         border-radius: round;
-        color: white;
+        color: rgb(12, 12, 12);
     }
     
-    .severeUV{
+    .UVBad{
         background-color: red;
         border-style: solid;
         border-radius: round;
-        color: white;
+        color: rgb(12, 11, 11);
     }

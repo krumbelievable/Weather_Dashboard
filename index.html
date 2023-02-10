@@ -15,9 +15,9 @@
 
 <body>
     <header>
-        <h1 class="top"> Weather Dashboard </h1>
+        <h1 class="top"> Your Weather Dashboard </h1>
     </header>
-
+        <!--divs that contains our search and all of the results -->
         <div class="container float-left">
             <div class="row w-100">
             <form id="weather-search" class="form d-grid gap-2 col-4">
@@ -29,13 +29,14 @@
             <div class="city-weather col-md-5 text-align-center border border-dark">
             </div>
         <div class="all-forecast container g-4 d-flex flex-wrap p-2">
+        <!--Div remains empty until search is complete-->
          <h3> 5 Day Forecast </h3>
             <div class='forecast-5 row p-2'></div>
         </div>
             </div>
         </div>
 
-
+        <!--javascript links-->
         <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js'></script>
         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="crossorigin="anonymous"></script>
         <script src="./Assets/script.js"></script>
